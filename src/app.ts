@@ -1,13 +1,15 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { UserRouter } from './Module/User/user.router';
-const app: Application = express();
+import { facilityRoute } from './Module/Facility/facility.router';
 
+const app = express();
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 // Router setup
 
-app.use('/api/user', UserRouter);
+app.use('/api/auth', UserRouter);
+app.use('/api/facility', facilityRoute);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
